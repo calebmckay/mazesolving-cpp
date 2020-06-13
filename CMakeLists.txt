@@ -8,7 +8,7 @@ set(CMAKE_LEGACY_CYGWIN_WIN32 0)
 # Main
 #-------
 # include files
-include_directories( ./include ./src )
+include_directories( ./include ./src ./lib/bitmap )
 
 # target
 add_executable( mazesolver ./src/main.cpp )
