@@ -2,7 +2,8 @@ cmake_minimum_required( VERSION 3.0 )
 
 project( mazesolving-cpp )
 
-set(CMAKE_LEGACY_CYGWIN_WIN32 0) 
+set(CMAKE_LEGACY_CYGWIN_WIN32 0)
+set(CMAKE_BUILD_TYPE Debug)
 
 #-------
 # Main
@@ -12,6 +13,7 @@ include_directories( ./include ./src ./lib/bitmap )
 
 # target
 add_executable( mazesolver ./src/main.cpp )
+add_executable( mazebuilder ./src/maze_builder.cpp )
 
 #-------
 # Tests
