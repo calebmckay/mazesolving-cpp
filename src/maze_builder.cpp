@@ -1,5 +1,6 @@
 #include <chrono>
 #include <cstdlib>
+#include <string>
 #include <thread>
 
 #include "maze_builder.h"
@@ -230,6 +231,7 @@ namespace mazeBuilder {
         auto t2 = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000000.0;
         std::cout << "Built maze: " << duration << " seconds" << std::endl;
+        std::cout << "  Seed: " << seed << std::endl;
         std::cout << "  Size: " << xSize << " x " << ySize << std::endl;
         std::cout << "  Pixels: " << xSize * ySize << std::endl;
         std::cout << "  Cells: " << xCells * yCells << std::endl;
@@ -297,8 +299,32 @@ namespace mazeBuilder {
     }
 }
 
-int main() {
-    mazeBuilder::DepthFirstBuilder maze;
+int main(int argc, char* argv[]) {
+    // Parse arguments
+    unsigned long seed = time(NULL);
+    unsigned int width = 21;
+    unsigned int height = 21;
+
+    for (int i = 1; i < argc; i++) {
+        std::string arg(argv[i]);
+        try {
+            if (arg == "-s" || arg == "--seed") {
+                seed = std::stol(std::string(argv[++i]));
+            }
+            else if (arg == "-w" || arg == "--width") {
+                width = std::stoi(std::string(argv[++i]));
+            }
+            else if (arg == "-h" || arg == "--height") {
+                height = std::stoi(std::string(argv[++i]));
+            }
+        } catch (std::invalid_argument const& e) {
+            std::cerr << "Invalid number: " << argv[i] << std::endl;
+        } catch (std::out_of_range const& e) {
+            std::cerr << "Number out of range: " << argv[i] << std::endl;
+        }
+    }
+
+    mazeBuilder::DepthFirstBuilder maze(seed, width, height);
     maze.makeImage("maze.bmp");
     std::cout << "Maze created!" << std::endl;
     return 0;

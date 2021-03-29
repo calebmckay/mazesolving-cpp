@@ -20,9 +20,9 @@ namespace mazeBuilder {
     class DepthFirstBuilder : public IMazeBuilder {
         public:
             DepthFirstBuilder(
-                unsigned long seed = time(NULL),
-                unsigned int xSize = 21,
-                unsigned int ySize = 21
+                unsigned long seed,
+                unsigned int xSize,
+                unsigned int ySize
             );
 
             virtual ~DepthFirstBuilder() {}
