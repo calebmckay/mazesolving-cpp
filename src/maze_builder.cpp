@@ -123,16 +123,27 @@ namespace mazeBuilder {
         std::srand(seed);
 
         LOG("buildMaze - initializing");
+
         // Create our structure of cells. Since walls are 1 pixel wide, we set up
-        // a cell every 2 pixels. The border of the maze is also 1 pixel wide (except
-        // if a size variable is even, then we'll make it 2 pixels so the maze size comes
-        // out correctly)
+        // a cell every 2 pixels. The border of the maze is also 1 pixel wide.
         const unsigned int CELL_BORDER_TOTAL_WIDTH = 2;
         if(xSize <= CELL_BORDER_TOTAL_WIDTH || ySize <= CELL_BORDER_TOTAL_WIDTH) {
             throw std::invalid_argument("Maze is too small to generate");
         }
-        xCells = std::ceil((xSize - CELL_BORDER_TOTAL_WIDTH)/2) + 1;
-        yCells = std::ceil((ySize - CELL_BORDER_TOTAL_WIDTH)/2) + 1;
+
+        // Round down the size to an odd number, so the maze sits evenly with the
+        // one pixel border on the outside.
+        if (xSize % 2 == 0) {
+            LOG("Rounding down xSize " << xSize << " to odd number " << xSize-1);
+            xSize--;
+        }
+        if (ySize % 2 == 0) {
+            LOG("Rounding down ySize " << ySize << " to odd number " << ySize-1);
+            ySize--;
+        }
+
+        xCells = ((xSize - CELL_BORDER_TOTAL_WIDTH)/2) + 1;
+        yCells = ((ySize - CELL_BORDER_TOTAL_WIDTH)/2) + 1;
         xPixels = (2 * xCells) - 1;
         yPixels = (2 * yCells) - 1;
 
