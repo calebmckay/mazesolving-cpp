@@ -1,6 +1,9 @@
+#include "maze_utils.h"
+
 #include <iostream>
 
 int main() {
-    std::cout << "Hello World!" << std::endl;
-    return 0;
+  mazeUtils::MazeNetwork maze("./maze.bmp");
+  std::cout << maze.toString() << std::endl;
+  return 0;
 }

@@ -12,7 +12,7 @@ set(CMAKE_BUILD_TYPE Debug)
 include_directories( ./include ./src ./lib/bitmap )
 
 # target
-add_executable( mazesolver ./src/main.cpp )
+add_executable( mazesolver ./src/main.cpp ./src/maze_utils.cpp)
 add_executable( mazebuilder ./src/maze_builder.cpp )
 
 #-------
