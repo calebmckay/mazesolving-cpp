@@ -3,6 +3,8 @@
 #include <forward_list>
 #include <string>
 
+#include <gtest/gtest_prod.h>
+
 const unsigned long int MAX_DISTANCE_FROM_EXIT = 0xffffffff;
 
 namespace mazeUtils {
@@ -22,6 +24,7 @@ namespace mazeUtils {
           std::size_t getX();
           std::size_t getY();
           Node* getNeighbor(Direction direction);
+          unsigned long int getDistance();
 
           void setLocation(std::size_t x, std::size_t y);
           void setNeighbor(Node* node, Direction direction);
@@ -43,13 +46,14 @@ namespace mazeUtils {
       int parseImage(std::string filePath);
       std::string toString();
     private:
+      FRIEND_TEST(MazeUtilTest, verifyShouldCreateNode);
       std::forward_list<Node*> nodeDb;
       Node* start = NULL;
       Node* end = NULL;
 
-      bool isWhite(rgb_t pixel);
-      bool shouldCreateNode(rgb_t n, rgb_t s, rgb_t e, rgb_t w);
-      bool shouldCreateNode(bool n, bool s, bool e, bool w);
+      static bool isWhite(rgb_t pixel);
+      static bool shouldCreateNode(rgb_t n, rgb_t s, rgb_t e, rgb_t w);
+      static bool shouldCreateNode(bool n, bool s, bool e, bool w);
       Node* addNode(std::size_t x, std::size_t y);
       void calculateDistances();
   };

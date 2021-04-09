@@ -51,6 +51,8 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
 endif()
 
 # Now simply link against gtest or gtest_main as needed. Eg
-add_executable( mazesolver-test ./tests/main.cpp )
+add_executable( mazesolver-test ./tests/main.cpp ./src/maze_utils.cpp)
+target_link_libraries( mazebuilder gtest_main )
+target_link_libraries( mazesolver gtest_main )
 target_link_libraries( mazesolver-test gtest_main )
 add_test(NAME mazesolver_test COMMAND mazesolver-test)

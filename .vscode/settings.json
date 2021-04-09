@@ -66,6 +66,9 @@
         "chrono": "cpp",
         "ratio": "cpp",
         "xthread": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "atomic": "cpp",
+        "iostream": "cpp",
+        "typeindex": "cpp"
     }
 }

@@ -38,6 +38,10 @@ namespace mazeUtils {
     return NULL;
   }
 
+  unsigned long int MazeNetwork::Node::getDistance() {
+    return this->distanceFromExit;
+  }
+
   void MazeNetwork::Node::setLocation(std::size_t x, std::size_t y) {
     this->x = x;
     this->y = y;
